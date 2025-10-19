@@ -1,26 +1,31 @@
 package com.health.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "laboratories")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Laboratory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     private Integer idLaboratory;
+
+    @NotBlank(message = "El nombre del laboratorio es obligatorio")
+    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
     private String name;
+
+    @NotBlank(message = "La dirección del laboratorio es obligatoria")
     private String address;
+
+    @NotBlank(message = "El teléfono del laboratorio es obligatorio")
+    @Pattern(regexp = "\\d{9}", message = "El teléfono debe tener 9 dígitos")
     private String phone;
-    private String email;
+
+    private Boolean active = true;
 }
