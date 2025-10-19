@@ -1,24 +1,27 @@
 package com.health.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "families")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Family {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     private Integer idFamily;
+
+    @NotBlank(message = "El nombre de la familia es obligatorio")
+    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
     private String name;
+
+    @NotBlank(message = "La descripción de la familia es obligatoria")
     private String description;
+
+    private Boolean active = true;
 }
