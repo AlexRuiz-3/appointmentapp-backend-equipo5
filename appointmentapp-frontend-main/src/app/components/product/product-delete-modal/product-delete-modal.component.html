@@ -1,1 +1,29 @@
-<p>product-delete-modal works!</p>
+
+
+<h1 mat-dialog-title>
+  Confirmación de Eliminación
+  <mat-icon color="warn">warning</mat-icon>
+</h1>
+
+<div mat-dialog-content>
+  <p>
+    ¿Estás seguro de que deseas eliminar este producto?
+    Esta acción es **irreversible**.
+  </p>
+  </div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancelClick()">
+    Cancelar
+  </button>
+
+  <button
+    mat-raised-button
+    color="warn"
+    [mat-dialog-close]="true"
+    cdkFocusInitial>
+    <mat-icon>delete</mat-icon>
+    Eliminar
+  </button>
+</div>
+
