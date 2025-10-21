@@ -1,0 +1,11 @@
+/* Contenedor del componente dropdown */
+.dropdown-container {
+  /* Asegura que el componente ocupe todo el ancho disponible */
+  width: 100%; 
+}
+
+/* Estilo para el campo de formulario de Angular Material */
+/* Esto asegura que el dropdown use el 100% del ancho de su contenedor */
+mat-form-field {
+  width: 100%;
+}
