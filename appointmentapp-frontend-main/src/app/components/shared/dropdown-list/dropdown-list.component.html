@@ -1,1 +1,33 @@
-<p>dropdown-list works!</p>
+<div class="dropdown-container">
+  <!-- mat-form-field envuelve el mat-select para darle el estilo de Angular Material -->
+  <mat-form-field appearance="outline">
+    <!-- El placeholder se define con el Input 'label' del componente TS -->
+    <mat-label>{{ label }}</mat-label> 
+
+    <!-- mat-select maneja la lógica del desplegable -->
+    <!-- (valueChange) emite el valor seleccionado cuando el usuario cambia la opción -->
+    <!-- [formControl] se usa para integrar el dropdown con un Formulario Reactivo (opcional) -->
+    <mat-select 
+      [formControl]="control" 
+      (valueChange)="onSelectionChange($event)"
+      [required]="required">
+      
+      <!-- Opción de placeholder o valor nulo -->
+      <mat-option value="">-- Seleccionar {{ label }} --</mat-option>
+
+      <!-- Itera sobre las opciones proporcionadas por el Input 'options' -->
+      <!-- 'value' y el texto de la opción se extraen de los campos 'valueField' y 'textField' -->
+      <mat-option *ngFor="let option of options" [value]="option[valueField]">
+        {{ option[textField] }}
+      </mat-option>
+    </mat-select>
+
+    <!-- Icono opcional si el componente TS lo proporciona -->
+    <mat-icon matSuffix *ngIf="icon">{{ icon }}</mat-icon>
+
+    <!-- Mensaje de error de Material (solo visible si el campo es requerido y no válido) -->
+    <mat-error *ngIf="control?.hasError('required')">
+      {{ label }} es **obligatorio**.
+    </mat-error>
+  </mat-form-field>
+</div>
