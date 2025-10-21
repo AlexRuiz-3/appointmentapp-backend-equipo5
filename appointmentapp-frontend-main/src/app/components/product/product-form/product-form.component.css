@@ -1,0 +1,79 @@
+/* Contenedor principal para centrado y espaciado */
+.product-list-container {
+  padding: 20px;
+  background-color: #f4f7f6;
+  min-height: 100vh;
+}
+
+/* Estilos de la tarjeta principal */
+mat-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el área de controles (Búsqueda y Botón Agregar) */
+.table-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Campo de búsqueda */
+.search-field {
+  width: 50%;
+  max-width: 300px;
+}
+
+/* Contenedor de la tabla y paginador */
+.mat-elevation-z8 {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos específicos de las celdas y filas */
+mat-header-cell {
+  font-weight: bold;
+  color: #3f51b5; /* Color primario */
+  font-size: 0.9em;
+  text-transform: uppercase;
+}
+
+mat-cell {
+  padding: 0 8px;
+}
+
+/* Columna de acciones con un ancho fijo */
+[matColumnDef="actions"] {
+  flex: 0 0 100px;
+}
+
+/* Estilo para stock bajo (alerta visual) */
+.low-stock {
+  font-weight: 600;
+  color: #f44336; /* Color rojo (warn) */
+  border: 1px solid #f44336;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+  .table-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .search-field {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* Ocultar algunas columnas en móvil para reducir el ancho */
+  .mat-column-category, .mat-column-id {
+    display: none;
+  }
+}
