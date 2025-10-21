@@ -1,1 +1,106 @@
-<p>product-list works!</p>
+<div class="form-container">
+  <mat-card>
+    <!-- Título de la Tarjeta -->
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>inventory</mat-icon>
+        Formulario de Producto
+      </mat-card-title>
+      <mat-card-subtitle>
+        Gestión de datos del inventario (Crear o Editar)
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- Contenido del Formulario (Enlazado con productForm en el TS) -->
+    <mat-card-content>
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+        <!-- Primera Fila: Nombre y SKU -->
+        <div class="form-row">
+          <!-- Campo Nombre -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Nombre del Producto</mat-label>
+            <input matInput formControlName="name" placeholder="Ej: Paracetamol 500mg">
+            <mat-icon matSuffix>badge</mat-icon>
+            <!-- Mensajes de Error para Nombre -->
+            <mat-error *ngIf="productForm.get('name')?.hasError('required')">
+              El nombre es **obligatorio**.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Campo SKU (Código) -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Código SKU</mat-label>
+            <input matInput formControlName="sku" placeholder="Ej: PRD-001">
+            <mat-icon matSuffix>vpn_key</mat-icon>
+            <!-- Mensajes de Error para SKU -->
+            <mat-error *ngIf="productForm.get('sku')?.hasError('required')">
+              El código SKU es **obligatorio**.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Segunda Fila: Precio y Stock -->
+        <div class="form-row">
+          <!-- Campo Precio -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Precio (USD)</mat-label>
+            <input matInput formControlName="price" type="number" placeholder="Ej: 1.50">
+            <mat-icon matSuffix>attach_money</mat-icon>
+            <!-- Mensajes de Error para Precio -->
+            <mat-error *ngIf="productForm.get('price')?.hasError('required')">
+              El precio es **obligatorio**.
+            </mat-error>
+            <mat-error *ngIf="productForm.get('price')?.hasError('min')">
+              El precio debe ser mayor a 0.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Campo Stock -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Stock</mat-label>
+            <input matInput formControlName="stock" type="number" placeholder="Ej: 150">
+            <mat-icon matSuffix>production_quantity_limit</mat-icon>
+            <!-- Mensajes de Error para Stock -->
+            <mat-error *ngIf="productForm.get('stock')?.hasError('required')">
+              El stock es **obligatorio**.
+            </mat-error>
+            <mat-error *ngIf="productForm.get('stock')?.hasError('min')">
+              El stock no puede ser negativo.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Tercera Fila: Categoría (Dropdown) -->
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Categoría</mat-label>
+            <mat-select formControlName="category">
+              <mat-option value="Farmacia">Farmacia</mat-option>
+              <mat-option value="Insumos">Insumos Médicos</mat-option>
+              <mat-option value="Equipos">Equipos</mat-option>
+              <mat-option value="Electrónica">Electrónica</mat-option>
+              <mat-option value="Alimentos">Alimentos</mat-option>
+            </mat-select>
+            <mat-icon matSuffix>category</mat-icon>
+            <!-- Mensajes de Error para Categoría -->
+            <mat-error *ngIf="productForm.get('category')?.hasError('required')">
+              La categoría es **obligatoria**.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Botones de Acción (Guardar/Cancelar) -->
+        <mat-card-actions align="end">
+          <button mat-button type="button" (click)="onCancel()">
+            Cancelar
+          </button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+            <mat-icon>save</mat-icon>
+            Guardar Producto
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
