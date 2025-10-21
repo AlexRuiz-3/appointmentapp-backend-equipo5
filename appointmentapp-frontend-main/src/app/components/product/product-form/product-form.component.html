@@ -1,1 +1,95 @@
 <p>product-form works!</p>
+
+<div class="product-list-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Inventario de Productos</mat-card-title>
+      <mat-card-subtitle>Gestión de medicamentos, insumos y equipos.</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Controles de Filtro y Acción -->
+      <div class="table-controls">
+        <!-- Campo de Búsqueda -->
+        <mat-form-field appearance="standard" class="search-field">
+          <mat-label>Buscar</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Escriba nombre o código" #input>
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <!-- Botón para Agregar Producto -->
+        <button mat-raised-button color="primary" (click)="addProduct()">
+          <mat-icon>add</mat-icon>
+          Agregar Producto
+        </button>
+      </div>
+
+      <!-- Tabla de Angular Material -->
+      <div class="mat-elevation-z8 table-responsive">
+        <mat-table [dataSource]="dataSource" matSort>
+
+          <!-- Columna ID -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{ row.id }} </mat-cell>
+          </ng-container>
+
+          <!-- Columna Nombre -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
+          </ng-container>
+
+          <!-- Columna Categoría -->
+          <ng-container matColumnDef="category">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Categoría </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{ row.category }} </mat-cell>
+          </ng-container>
+
+          <!-- Columna Precio -->
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Precio </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{ row.price | currency:'USD':'symbol':'1.2-2' }} </mat-cell>
+          </ng-container>
+
+          <!-- Columna Stock -->
+          <ng-container matColumnDef="stock">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Stock </mat-header-cell>
+            <mat-cell *matCellDef="let row"> 
+              <span [class.low-stock]="row.stock < 50">{{ row.stock }}</span>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Columna Acciones -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button mat-icon-button color="primary" (click)="editProduct(row)" title="Editar">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteProduct(row)" title="Eliminar">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Fila de Encabezado -->
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <!-- Filas de Datos -->
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+          <!-- Mensaje cuando no hay datos -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="6">
+              No se encontraron productos que coincidan con "{{input.value}}"
+            </td>
+          </tr>
+        </mat-table>
+
+        <!-- Paginador de Material -->
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of products"></mat-paginator>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>
