@@ -1,0 +1,37 @@
+/* Estilos para el título del modal */
+[mat-dialog-title] {
+  /* Alinea el texto a la izquierda y el icono a la derecha */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px; /* Un poco de espacio debajo del título */
+  /* Usa una fuente más grande y en negrita */
+  font-size: 1.5em;
+  font-weight: 500;
+  border-bottom: 1px solid #ccc; /* Línea separadora para el título */
+  margin-bottom: 15px;
+}
+
+/* Estilos para el icono de advertencia (color="warn" de Material) */
+[mat-dialog-title] mat-icon {
+  margin-left: 10px;
+  font-size: 1.5em;
+}
+
+/* Estilos para el contenido del modal */
+[mat-dialog-content] p {
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Estilos para los botones de acción (Cancel/Eliminar) */
+[mat-dialog-actions] {
+  padding-top: 15px; /* Espacio antes de los botones */
+  /* Asegura que los botones se alineen al final (derecha) */
+  justify-content: flex-end;
+}
+
+/* Estilos para el botón de Cancelar */
+[mat-dialog-actions] button:first-child {
+  margin-right: 10px;
+}
